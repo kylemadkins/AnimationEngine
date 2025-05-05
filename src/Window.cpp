@@ -7,7 +7,7 @@ bool Window::init(unsigned int width, unsigned int height, std::string title) {
 		return false;
 	}
 
-	/* set a "hint" for the NEXT window created */
+	/* set a "hint" for the next window created */
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	mWindow = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
@@ -18,13 +18,23 @@ bool Window::init(unsigned int width, unsigned int height, std::string title) {
 		return false;
 	}
 
+	glfwMakeContextCurrent(mWindow);
+
 	Logger::log(1, "%s: Window successfully initialized\n", __FUNCTION__);
 	
 	return true;
 }
 
 void Window::mainLoop() {
+	glfwSwapInterval(1);
+	float color = 0.0f;
+
 	while (!glfwWindowShouldClose(mWindow)) {
+		color >= 1.0f ? color = 0.0f : color += 0.01f;
+		glClearColor(color, color, color, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(mWindow);
+
 		/* poll events in a loop */
 		glfwPollEvents();
 	}

@@ -10,9 +10,14 @@ project("AnimationEngine")
 
 add_subdirectory("external/glfw-3.4")
 
-add_executable(AnimationEngine "src/Main.cpp"  "src/Window.h" "src/Logger.h" "src/Window.cpp" "src/Logger.cpp")
+set(OPEN_GL_PREFERENCE GLVND)
+find_package(OpenGL REQUIRED)
 
-target_link_libraries(AnimationEngine PRIVATE glfw)
+file(GLOB SOURCES src/*.h src/*.cpp)
+
+add_executable(AnimationEngine ${SOURCES})
+
+target_link_libraries(AnimationEngine PRIVATE glfw OpenGL::GL)
 
 target_include_directories(AnimationEngine PRIVATE "external/glfw-3.4/include")
 

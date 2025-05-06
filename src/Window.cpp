@@ -86,11 +86,11 @@ void Window::handleKeyEvents(int key, int scancode, int action, int mods) {
 
 	const char* keyName = glfwGetKeyName(key, 0);
 
-	Logger::log(1, "%s: Key %s (key %i, scancode %i) %s\n", __FUNCTION__, keyName, key, scancode, actionName.c_str());
+	Logger::log(1, "%s: key %s (key %i, scancode %i) %s\n", __FUNCTION__, keyName, key, scancode, actionName.c_str());
 }
 
 void Window::handleCursorPosEvents(double xpos, double ypos) {
-	Logger::log(1, "%s: Mouse moved (x: %f, y: %f)\n", __FUNCTION__, xpos, ypos);
+	Logger::log(1, "%s: mouse moved (x: %f, y: %f)\n", __FUNCTION__, xpos, ypos);
 }
 
 void Window::handleMouseButtonEvents(int button, int action, int mods) {

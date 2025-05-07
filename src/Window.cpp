@@ -7,9 +7,6 @@ bool Window::init(unsigned int width, unsigned int height, std::string title) {
 		return false;
 	}
 
-	/* prevents the user from resizing the next window created */
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-
 	mWindow = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
 	if (!mWindow) {
@@ -41,6 +38,11 @@ bool Window::init(unsigned int width, unsigned int height, std::string title) {
 	glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* window, int button, int action, int mods) {
 		auto self = static_cast<Window*>(glfwGetWindowUserPointer(window));
 		self->handleMouseButtonEvents(button, action, mods);
+	});
+
+	glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* window, int width, int height) {
+		auto self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+		self->handleWindowSizeEvents(width, height);
 	});
 
 	Logger::log(1, "%s: Window successfully initialized\n", __FUNCTION__);
@@ -128,6 +130,10 @@ void Window::handleMouseButtonEvents(int button, int action, int mods) {
 	}
 
 	Logger::log(1, "%s: %s mouse button (%i) %s\n", __FUNCTION__, buttonName.c_str(), button, actionName.c_str());
+}
+
+void Window::handleWindowSizeEvents(int width, int height) {
+	Logger::log(1, "%s: Window resized to %ix%i\n", __FUNCTION__, width, height);
 }
 
 void Window::cleanup() {

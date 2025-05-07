@@ -48,6 +48,10 @@ bool Window::init(unsigned int width, unsigned int height, std::string title) {
 	return true;
 }
 
+void Window::setTitle(std::string title) {
+	glfwSetWindowTitle(mWindow, title.c_str());
+}
+
 void Window::mainLoop() {
 	glfwSwapInterval(1);
 	float color = 0.0f;

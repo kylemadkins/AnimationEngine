@@ -74,7 +74,13 @@ void Window::handleWindowCloseEvents() {
 }
 
 void Window::handleKeyEvents(int key, int scancode, int action, int mods) {
-	std::string actionName;
+	if (trackedKeys.find(key) != trackedKeys.end()) {
+		inputState[key] = (action != GLFW_RELEASE);
+	}
+
+	const char* keyName = glfwGetKeyName(key, 0);
+	const char* actionName;
+
 	switch (action) {
 		case GLFW_PRESS:
 			actionName = "pressed";
@@ -90,9 +96,7 @@ void Window::handleKeyEvents(int key, int scancode, int action, int mods) {
 			break;
 	}
 
-	const char* keyName = glfwGetKeyName(key, 0);
-
-	Logger::log(1, "%s: key %s (key %i, scancode %i) %s\n", __FUNCTION__, keyName, key, scancode, actionName.c_str());
+	Logger::log(1, "%s: key %s (key %i, scancode %i) %s\n", __FUNCTION__, keyName, key, scancode, actionName);
 }
 
 void Window::handleCursorPosEvents(double xpos, double ypos) {

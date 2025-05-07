@@ -70,7 +70,7 @@ void Window::mainLoop() {
 }
 
 void Window::handleWindowCloseEvents() {
-	Logger::log(1, "%s: Window got close event... bye!\n", __FUNCTION__);
+	Logger::log(1, "%s: Window received close event... bye!\n", __FUNCTION__);
 }
 
 void Window::handleKeyEvents(int key, int scancode, int action, int mods) {
@@ -96,11 +96,11 @@ void Window::handleKeyEvents(int key, int scancode, int action, int mods) {
 			break;
 	}
 
-	Logger::log(1, "%s: key %s (key %i, scancode %i) %s\n", __FUNCTION__, keyName, key, scancode, actionName);
+	Logger::log(1, "%s: Key %s (%i) %s\n", __FUNCTION__, keyName, key, actionName);
 }
 
 void Window::handleCursorPosEvents(double xpos, double ypos) {
-	Logger::log(1, "%s: mouse moved (x: %f, y: %f)\n", __FUNCTION__, xpos, ypos);
+	Logger::log(1, "%s: Mouse moved (x: %f, y: %f)\n", __FUNCTION__, xpos, ypos);
 }
 
 void Window::handleMouseButtonEvents(int button, int action, int mods) {
@@ -120,16 +120,16 @@ void Window::handleMouseButtonEvents(int button, int action, int mods) {
 	std::string buttonName;
 	switch (button) {
 	case GLFW_MOUSE_BUTTON_LEFT:
-		buttonName = "left";
+		buttonName = "Left";
 		break;
 	case GLFW_MOUSE_BUTTON_MIDDLE:
-		buttonName = "middle";
+		buttonName = "Middle";
 		break;
 	case GLFW_MOUSE_BUTTON_RIGHT:
-		buttonName = "right";
+		buttonName = "Right";
 		break;
 	default:
-		buttonName = "other";
+		buttonName = "Other";
 		break;
 	}
 
@@ -141,7 +141,7 @@ void Window::handleWindowSizeEvents(int width, int height) {
 }
 
 void Window::cleanup() {
-	Logger::log(1, "%s: Terminating Window\n", __FUNCTION__);
+	Logger::log(1, "%s: Terminating window\n", __FUNCTION__);
 	glfwDestroyWindow(mWindow);
 	glfwTerminate();
 }

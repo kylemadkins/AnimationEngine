@@ -104,7 +104,7 @@ void Window::handleCursorPosEvents(double xpos, double ypos) {
 }
 
 void Window::handleMouseButtonEvents(int button, int action, int mods) {
-	std::string actionName;
+	char* actionName;
 	switch (action) {
 	case GLFW_PRESS:
 		actionName = "pressed";
@@ -117,7 +117,7 @@ void Window::handleMouseButtonEvents(int button, int action, int mods) {
 		break;
 	}
 
-	std::string buttonName;
+	char* buttonName;
 	switch (button) {
 	case GLFW_MOUSE_BUTTON_LEFT:
 		buttonName = "Left";
@@ -133,7 +133,7 @@ void Window::handleMouseButtonEvents(int button, int action, int mods) {
 		break;
 	}
 
-	Logger::log(1, "%s: %s mouse button (%i) %s\n", __FUNCTION__, buttonName.c_str(), button, actionName.c_str());
+	Logger::log(1, "%s: %s mouse button (%i) %s\n", __FUNCTION__, buttonName, button, actionName);
 }
 
 void Window::handleWindowSizeEvents(int width, int height) {
